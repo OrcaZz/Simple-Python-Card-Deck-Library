@@ -23,3 +23,7 @@ CardDict = {
 CardList = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
 SuitList = ['Hearts', 'Clubs', 'Diamonds', 'Spades']
+
+RedSuits = ['Clubs', 'Spades']
+
+BlackSuits = ['Diamonds', 'Hearts']
