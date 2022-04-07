@@ -15,33 +15,33 @@ class Player:
         
         # hs_i = handsize initial. Ie, for blackjack/texas hold 'em: 2, for 5 card draw: 5
         
-        self.hs_i = hs_i
+        self._hs_i = hs_i
         
-        self.name = name
-        self.hand = Hand()
+        self._name = name
+        self._hand = Hand()
         
         # Which deck this player is using to draw from
         
-        self.playdeck = deck
+        self._playdeck = deck
         self.initial(self.hs_i)
     
     def add(self, card):
         
         # Adds a specific card to hand
         
-        self.hand.addCard(card)
+        self._hand.addCard(card)
         
     def hit(self):
         
         # Adds random card to hand from deck
         
-        self.playdeck.deal(self)
+        self._playdeck.deal(self)
         
     def drop(self, cardout):
         
         # Removes a specific card from hand
         
-        self.hand.remCard(cardout)
+        self._hand.remCard(cardout)
         
     def swapHit(self, cardout):
         
@@ -68,15 +68,26 @@ class Player:
         
         # Creates a new hand from the deck
         
-        self.hand.Clear()
+        self._hand.Clear()
         self.initial()
         
     def printHand(self):
         
         # Prints the current content of the hand
         
-        self.hand.printHand()
-
+        self._hand.printHand()
+    
+    def getName(self):
+        
+        # Returns the name of the player
+        
+        return self._name
+    
+    def getHand(self):
+        
+        # Returns the hand of the player
+        
+        return self._hand
 
 class Card:
     
@@ -84,51 +95,56 @@ class Card:
     
     def __init__(self, val, suit):
         
-        self.suit = suit            # Card's suit
-        self.val = c.CardDict[val]  # Card's numeric value
-        self.title = val + suit[0]  # Card's full title (shorthand)
+        self._suit = suit            # Card's suit
+        self._val = c.CardDict[val]  # Card's numeric value
+        self._title = val + suit[0]  # Card's full title (shorthand)
         
     def AceSwitch(self):
         
         # Changes ace from high to low
         
-        if(self.val == 11):
-            self.val = 1
-        elif(self.val == 1):
-            self.val = 11
+        if(self._val == 11):
+            self._val = 1
+        elif(self._val == 1):
+            self._val = 11
         
+    def getTitle(self):
+        
+        # Gets the card's title
+        
+        return self._title
         
 class Hand:
     
     def __init__(self):
         
-        self.cards = []
+        self._cards = []
         
     def addCard(self, card):
         
         # Adds a specific card to a hand
         
-        self.cards.append(card)
+        self._cards.append(card)
         
     def remCard(self, card):
         
         # Removes a specific card from a hand
         
-        self.cards.remove(card)
+        self._cards.remove(card)
         
     def Clear(self):
         
         # Empties the hand
         
-        self.cards = []
+        self._cards = []
     
     def printHand(self):
         
         # Prints the hand in a scuffed but understandable format
         
         print('[', end = '')
-        for i_card in self.cards:
-            print(i_card.title, end = ", ")
+        for i_card in self._cards:
+            print(i_card.getTitle(), end = ", ")
         print(']')
     
     
@@ -136,22 +152,22 @@ class Deck:
     
     def __init__(self):
         
-        self.cards = []
-        self.reset()
+        self._cards = []
+        self._reset()
         
     def deal(self, player):
         
         # Deals a specific player the topmost card on the deck
         
-        card_out = self.cards[0]
-        self.cards.pop(0)
-        player.hand.addCard(card_out)
+        card_out = self._cards[0]
+        self._cards.pop(0)
+        player.getHand.addCard(card_out)
         
     def shuffleDeck(self):
         
         # Shuffles the deck using random's shuffle function
         
-        r.shuffle(self.cards)
+        r.shuffle(self._cards)
         
     def reset(self):
         
@@ -161,7 +177,7 @@ class Deck:
 
         for m_suit in c.SuitList:
             for m_card in c.CardList:
-                self.cards.append(Card(m_card, m_suit))
+                self._cards.append(Card(m_card, m_suit))
                 
         self.shuffleDeck()
     
@@ -170,6 +186,6 @@ class Deck:
         # Prints the deck in a scuffed but understandable manner
         
         print('[', end = '')
-        for i_card in self.cards:
-            print(i_card.title, end = ", ")
+        for i_card in self._cards:
+            print(i_card.getTitle(), end = ", ")
         print(']')
