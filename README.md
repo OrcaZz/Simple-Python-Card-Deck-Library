@@ -23,7 +23,7 @@ Before we go on to use our library and its classes, lets first learn about their
 
 Classes have extreme importance across the field of computer science. We use them to bundle data and functions together (however, in this context, they are called methods).
 
-You can think of a class as a blueprint for a specific kind of object. For example, there may be a class "Car", which we can use to create many different cars with a unique set of attributes. Each object will have the same kinds of attributes, but may have a different value. While there is only one class car, we might create a red car with manual transmission, or a blue car that is automatic.
+You can think of a class as a blueprint for a specific kind of object. For example, there may be a class "Car", which we can use to create many different cars with a unique set of attributes. Each object will have the same kinds of attributes, but may have a different value. While there is only one class car, we might create a red car with manual transmission, or a blue car that is automatic. Importantly however, both will have access to the same functionality, such as driving.
 
 Immediately, it should become evident that we can use this to our advantage when managing large sets of data that is connected. 
 
